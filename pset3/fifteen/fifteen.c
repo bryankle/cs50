@@ -180,7 +180,14 @@ void draw(void)
     {
         for (int j = 0; j < d; j++)
         {
-            printf("%2i", board[i][j]);
+            if (board[i][j] != 0)
+            {
+                printf("%2i", board[i][j]);
+            }
+            else
+            {
+                printf("%2s", "_");
+            }
         }
         printf("\n");
     }
@@ -193,6 +200,63 @@ void draw(void)
 bool move(int tile)
 {
     // TODO
+    // Find location of 0 and return coordinates i and j
+    int empty[2]; // Initialize array to record location of empty space
+    int tileLoc[2]; // Initialize array to record location of requested tile
+    // Loop over every value inside the board to assign location of empty space and selected tile
+    // i travels down
+    // j travels across
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] == 0)
+            {
+                empty[0] = i;
+                empty[1] = j;
+            }
+            if (board[i][j] == tile)
+            {
+                tileLoc[0] = i;
+                tileLoc[1] = j;
+            }
+        }
+    }
+    // Prints current coordinates of empty
+    // printf("%d\n", empty[0]);
+    // printf("%d\n", empty[1]);
+    // Check user selected tile up, down, left, right for empty slot, if true, the proceed, otherwise, request new tile from user
+    // printf("%s%d\n", "tile: ", tile);
+    // printf("%s%d\n", "tile i: ", tileLoc[0]);
+    // printf("%s%d\n", "tile j: ", tileLoc[1]);
+    // // Checks the board value up, left, down, right of user selected value if empty space is found
+    if (
+        // Right
+        (tileLoc[0] == empty[0] &&
+        tileLoc[1] + 1 == empty[1]) ||
+        // Down
+        (tileLoc[0] + 1 == empty[0] &&
+        tileLoc[1] == empty[1]) ||
+        // Up
+        (tileLoc[0] - 1 == empty[0] &&
+        tileLoc[1] == empty[1]) ||
+        // Left
+        (tileLoc[0] == empty[0] &&
+        tileLoc[1] - 1 == empty[1])
+        )
+    {
+        // printf("%s\n", "Empty space nearby");
+        // Initialize temporary placeholder array to perform switching
+        // int temp[2];
+        // temp[0] = tileLoc[0];
+        // temp[1] = tileLoc[1];
+        // Switch empty value into selected value
+        board[empty[0]][empty[1]] = tile;
+        board[tileLoc[0]][tileLoc[1]] = 0;
+        return true;
+
+    }
+
     return false;
 }
 
@@ -202,6 +266,32 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
+    // Quantity of non-zero numbers
+    int total = 0;
+    // Loop through array to check order
+    // Loop down column
+    while (total < ( d * d ) - 1)
+    {
+        bool matched = true;
+        // Loop down column
+        for (int i = 0; i < d; i++)
+        {
+            // Loop through row
+            for (int j = 0; j < d; j++)
+            {
+                // If value is in correct order, proceed to next
+                if (board[i][j] == total) {
+                    total++;
+                }
+                // If value does not match expected correct value, return false
+                else
+                {
+                    matched = false;
+                }
+            }
+        }
+        return matched;
+    }
+    // If entire board is successfully traversed, then return true
     return false;
 }
