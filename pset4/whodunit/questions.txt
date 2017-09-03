@@ -1,0 +1,37 @@
+1.  What's stdint.h?
+    stdint.h introduces new integer types that may assist in standardizing the number bytes associated with images.
+
+2.  What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+    Assign number of bytes in an int? // https://www.badprog.com/c-type-what-are-uint8-t-uint16-t-uint32-t-and-uint64-t
+
+3.  How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+    BYTE - 1
+    DWORD - 4
+    LONG - 4
+    WORD - 2
+4.  What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats (with high probability) are generally called "magic numbers."
+    0x, 'here comes a series of hexadecimal digits'
+
+5.  What’s the difference between bfSize and biSize?
+    bfSize is the size of the entire BMP file. biSize is the size of the BITMAPINFOHEADER header file, which is constant at 40 bytes.
+
+6.  What does it mean if biHeight is negative?
+    The bitmap is a top-down DIB (device independent bitmap) with the origin at the upper left corner
+
+7.  What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+    biBitCount
+
+8.  Why might fopen return NULL in lines 24 and 32 of copy.c?
+    If no file name is provided in command line argument
+
+9.  Why is the third argument to fread always 1 in our code?
+    The third argument represents the file count. In this case, we are only reading 1 file.
+
+10. What value does line 65 of copy.c assign to padding if bi.biWidth is 3?
+    1
+
+11. What does fseek do?
+    Moves the file pointer to a certain location
+
+12. What is SEEK_CUR?
+    The current position of the file pointer
