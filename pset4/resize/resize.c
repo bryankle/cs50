@@ -56,9 +56,7 @@ int main(int argc, char *argv[])
         return 4;
     }
     printf("%d\n", bi.biWidth);
-    // Edit header
-    bi.biWidth *= n;
-    bi.biHeight *= n;
+
     // write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
 
